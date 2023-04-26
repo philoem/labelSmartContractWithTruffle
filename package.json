@@ -1,0 +1,11 @@
+{
+  "name": "labelcontractwithtruffle",
+  "version": "1.0.0",
+  "description": "Handle smart contract for musical label with Truffle",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Philoem",
+  "license": "ISC"
+}
