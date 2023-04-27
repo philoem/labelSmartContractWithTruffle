@@ -1,7 +1,15 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
 
-contract MusicianManager {
+import "./SecurityManager.sol";
+
+contract MusicianManager is SecurityManager{
+
+  SecurityManager public securityManager;
+
+  constructor() {
+    securityManager = new SecurityManager();
+  }
 
   event musicianCreated(string _artistName);
   event trackAdded(string _artistName, string _title);
@@ -17,18 +25,7 @@ contract MusicianManager {
     Track[] _tracks;
   }
 
-  mapping (address => Musician) Musicians;
-
-  address owner;
-
-  constructor() {
-    owner = msg.sender;
-  }
-
-  modifier onlyOwner() {
-    require(msg.sender == owner, 'Not the Owner');
-    _;
-  }
+  mapping (address => Musician) Musicians;  
 
   function addMusician(address _musicianAddress, string memory _artistName) external onlyOwner {
     require(bytes(Musicians[_musicianAddress]._artistName).length == 0, 'This musician has been already created');
@@ -46,7 +43,5 @@ contract MusicianManager {
   function getTracks(address _musicianAddress) external {
     emit getTheTracks(Musicians[_musicianAddress]._tracks);
   }
-
-
 
 }
